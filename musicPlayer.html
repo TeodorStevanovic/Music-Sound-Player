@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moderni Muzicki Plejer</title>
+  <link rel="stylesheet" href="musicPlayer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <nav class="nav-bar">
+    <a href="/" class="nav-logo">
+      <img src="logo-cover/music-party-svgrepo-com.svg" alt="logo">
+      <h1>Soundify</h1>
+    </a>
+
+    <div class="filter-controls">
+      <input type="text" id="searchInput" placeholder="Pretraži pesme..." />
+      <select id="sortSelect">
+        <option value="all">All Songs</option>
+        <option value="dire-straits-all-songs">Dire Straits All Songs</option>
+        <optgroup label="Dire Straits">
+          <option value="brothers-in-arms">Brothers In Arms</option>
+          <option value="on-every-street">On Every Street</option>
+        </optgroup>
+        <option value="ploho-all-songs">Ploho All Songs</option>
+      </select>
+    </div>
+
+    <ul class="nav-links">
+      <li class="nav-option"><a href=""><i class="fa-solid fa-house"></i>Home</a></li>
+      <li class="nav-option"><a href=""><i class="fa-solid fa-compass"></i>Explore</a></li>
+      <li class="nav-option"><a href=""><i class="fa-solid fa-floppy-disk"></i>Library</a></li>
+    </ul>
+  </nav>
+
+  <ul id="playlist"></ul>
+
+  <!-- Dugme za otvaranje forme -->
+  <button id="openFormBtn" class="add-song-btn"><i class="fa-solid fa-plus"></i></button>
+
+  <!-- Kontejner za formu -->
+  <div id="form-container" class="form-container hidden">
+    <form id="songForm" class="form-wrapper">
+      <h2>Dodaj novu pesmu</h2>
+      <input type="text" id="title" placeholder="Naziv pesme" required />
+      <input type="text" id="artist" placeholder="Izvođač" required />
+      <input type="text" id="album" placeholder="Naziv albuma" required />
+      <input type="text" id="duration" placeholder="Trajanje (npr. 3:45)" required />
+      <input type="text" id="img" placeholder="Putanja do slike (URL ili lokalna)" required />
+      <input type="text" id="src" placeholder="Putanja do audio fajla (src)" required />
+      <button type="submit">Dodaj</button>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="player-card">
+      <div class="now-playing" id="now-playing"></div>
+
+      <div class="controls">
+        <button id="prevBtn" class="control-btn">
+          <i class="fa-solid fa-backward"></i>
+        </button>
+        <button id="playBtn" class="control-btn">
+          <i class="fa-solid fa-pause"></i>
+        </button>
+        <button id="nextBtn" class="control-btn">
+          <i class="fa-solid fa-forward"></i>
+        </button>
+        <button id="shuffleBtn" class="control-btn">
+          <i class="fa-solid fa-shuffle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="musicPlayer.js"></script>
+</body>
+
+</html>
