@@ -76,8 +76,8 @@ const renderSongs = (array) => {
 };
 
 const setSongsList = (arr = userData?.songs) => {
-  if(arr.length === 0){
-    playlistSongs.innerHTML = "<p>Trenutno nema podataka o trazenoj pesmi.</p>"
+  if (arr.length === 0) {
+    playlistSongs.innerHTML = "<p>Trenutno nema podataka o trazenoj pesmi.</p>";
     return;
   }
   playlistSongs.innerHTML = arr
@@ -141,8 +141,10 @@ const pauseSong = () => {
 };
 
 const togglePlayPause = () => {
+  if(!userData.currentSong) return;
+
   if (audio.paused) {
-    playSong(userData.currentSong.id);
+    audio.play();
     playButton.innerHTML = `<i class="fa-solid fa-pause"></i>`;
   } else {
     pauseSong();
@@ -180,10 +182,6 @@ const getCurrentSongIndex = () =>
 
 const updateProgressBar = () => {
   const progress = document.querySelector(".now-playing-duration");
-  if (!isNaN(audio.duration)) {
-    progress.max = audio.duration;
-    console.log("e");
-  }
   progress.value = audio.currentTime;
 };
 
@@ -230,6 +228,10 @@ renderSongs(userData.songs);
 playButton.addEventListener("click", togglePlayPause);
 audio.addEventListener("ended", nextSong);
 audio.addEventListener("timeupdate", updateProgressBar);
+audio.addEventListener("loadedmetadata", () => {
+  const progress = document.querySelector(".now-playing-duration");
+  progress.max = audio.duration;
+});
 searchInputSong.addEventListener("input", (e) => {
   const searchInputTerm = e.target.value.toLowerCase();
 
@@ -274,9 +276,7 @@ sortSongsDropdownList.addEventListener("change", (e) => {
       break;
 
     case "ploho-all-songs":
-      setSongsList(
-        userData?.songs.filter((song) => song.artist === "Ploho")
-      );
+      setSongsList(userData?.songs.filter((song) => song.artist === "Ploho"));
       break;
 
     default:
